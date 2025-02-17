@@ -16,5 +16,6 @@
 
     <!-- Footer -->
     @include('layouts.footer')
+    @yield('scripts')
 </body>
 </html>
