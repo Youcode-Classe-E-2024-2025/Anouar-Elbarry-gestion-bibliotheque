@@ -9,7 +9,7 @@
                 <!-- Book Image Section -->
                 <div class="p-8">
                     <div class="relative">
-                        <img src="/api/placeholder/600/800" alt="Book Cover" 
+                        <img src="{{ $book->cover_img }}" alt="Book Cover" 
                              class="w-full h-[500px] object-cover rounded-lg shadow-lg">
                         
                             @if ($book->is_active)
@@ -29,17 +29,17 @@
                     <div class="space-y-6">
                         <div>
                             <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $book->title }}</h1>
-                            <p class="text-xl text-gray-600">F. Scott Fitzgerald</p>
+                            <p class="text-xl text-gray-600">{{ $book->author }}</p>
                         </div>
 
                         <div class="space-y-4">
                             <div class="flex items-center space-x-4">
                                 <span class="text-gray-600">Published:</span>
-                                <span class="text-gray-700">1925</span>
+                                <span class="text-gray-700">{{ $book->publication_year }}</span>
                             </div>
                             <div class="flex items-center space-x-4">
-                                <span class="text-gray-600">Pages:</span>
-                                <span class="text-gray-700">180</span>
+                                <span class="text-gray-600">Available Copies:</span>
+                                <span class="text-gray-700">{{ $book->available_copies }}</span>
                             </div>
                         </div>
 
