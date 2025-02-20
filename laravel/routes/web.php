@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,5 @@ Route::get('/profile', function () {
 // back
 
 Route::get('/books',[BookController::class,'index'])->name('list');
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::post('/dashboard/createBook',[DashboardController::class,'createBook'])->name('create.book');
