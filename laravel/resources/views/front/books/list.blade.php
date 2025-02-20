@@ -55,14 +55,11 @@
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-4">
                         <h2 class="text-2xl font-bold text-gray-900">{{ $book->title }}</h2>
-                        <div class="flex text-yellow-400">
-                            ★★★★☆
-                        </div>
                     </div>
                     <p class="text-gray-600 mb-4">F. Scott Fitzgerald</p>
                     <p class="text-gray-700 mb-6">{{ $book->desciption }}</p>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-500">Available Copies: 3</span>
+                        <span class="text-sm text-gray-500">Available Copies: {{ $book->available_copies }}</span>
                         <a href="{{ route('details',$book->id) }}" class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition duration-300">
                             View Details
                         </a>
