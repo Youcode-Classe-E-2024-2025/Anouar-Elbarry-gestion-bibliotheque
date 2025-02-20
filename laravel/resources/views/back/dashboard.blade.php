@@ -9,7 +9,7 @@
                 <div class="bg-gray-100 border-b px-4 py-3">
                     <h3 class="text-xl font-semibold text-gray-800">Add New Book</h3>
                 </div>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('create.book') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="p-6 space-y-4">
                         <div>
@@ -29,37 +29,34 @@
                                    required>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-medium mb-2">ISBN</label>
-                            <input type="text" 
-                                   name="isbn"
+                            <label class="block text-gray-700 font-medium mb-2">Publication Year</label>
+                            <input type="number" 
+                                   name="publication_year"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                   placeholder="Enter ISBN">
+                                   placeholder="Enter publication year" 
+                                   max="2025" min="1800"
+                                   required>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-medium mb-2">Category</label>
-                            <select 
-                                name="category_id"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required>
-                                <option value="">Select a category</option>
-                                <option value="1">Fiction</option>
-                                <option value="2">Non-Fiction</option>
-                                <option value="3">Science Fiction</option>
-                                <option value="4">Mystery</option>
-                            </select>
+                            <label class="block text-gray-700 font-medium mb-2">Price</label>
+                            <input type="number" 
+                                   name="price"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   placeholder="Enter the Price" 
+                                   required>
                         </div>
                         <div>
                             <label class="block text-gray-700 font-medium mb-2">Description</label>
                             <textarea 
-                                name="description"
+                                name="desciption"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                 rows="3" 
                                 placeholder="Enter book description"></textarea>
                         </div>
                         <div>
                             <label class="block text-gray-700 font-medium mb-2">Cover Image</label>
-                            <input type="file" 
-                                   name="cover_image"
+                            <input type="text" 
+                                   name="cover_img"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <button 
@@ -84,62 +81,39 @@
                             <tr>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">price</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">created_at</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($books as $book)
                             <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">The Great Gatsby</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">F. Scott Fitzgerald</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">Fiction</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">{{ $book->title }}</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{{ $book->author }}</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">${{ $book->price }}</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{{ $book->created_at }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
                                         <a href="#" 
-                                           class="text-yellow-600 bg-yellow-100 px-2 py-1 rounded-md text-xs hover:bg-yellow-200 transition duration-300">
+                                           class="text-gray-600 bg-gray-100 px-2 py-1 rounded-md text-xs hover:bg-gray-200 transition duration-300">
                                             Edit
                                         </a>
+                                        @if ($book->is_active)
                                         <a href="#" 
-                                           class="text-red-600 bg-red-100 px-2 py-1 rounded-md text-xs hover:bg-red-200 transition duration-300">
-                                            Delete
+                                           class="text-yellow-600 bg-yellow-100 px-2 py-1 rounded-md text-xs hover:bg-yellow-200 transition duration-300">
+                                            Archive
                                         </a>
+                                        @else
+                                        <a href="#" 
+                                           class="text-green-600 bg-green-100 px-2 py-1 rounded-md text-xs hover:bg-green-200 transition duration-300">
+                                            Active
+                                        </a>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">1984</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">George Orwell</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">Science Fiction</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex space-x-2">
-                                        <a href="#" 
-                                           class="text-yellow-600 bg-yellow-100 px-2 py-1 rounded-md text-xs hover:bg-yellow-200 transition duration-300">
-                                            Edit
-                                        </a>
-                                        <a href="#" 
-                                           class="text-red-600 bg-red-100 px-2 py-1 rounded-md text-xs hover:bg-red-200 transition duration-300">
-                                            Delete
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">To Kill a Mockingbird</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">Harper Lee</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">Fiction</td>
-                                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex space-x-2">
-                                        <a href="#" 
-                                           class="text-yellow-600 bg-yellow-100 px-2 py-1 rounded-md text-xs hover:bg-yellow-200 transition duration-300">
-                                            Edit
-                                        </a>
-                                        <a href="#" 
-                                           class="text-red-600 bg-red-100 px-2 py-1 rounded-md text-xs hover:bg-red-200 transition duration-300">
-                                            Delete
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
