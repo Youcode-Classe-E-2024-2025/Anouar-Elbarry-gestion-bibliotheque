@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/books', function () {
-    return view('books/list');
-});
-Route::get('/books/details', function () {
-    return view('books/details');
-});
+Route::get('/',[BookController::class,'Last3books'])->name('last3books');
+// Route::get('/books', function () {
+//     return view('front/books/list');
+// });
+Route::get('/books/details/{book}',[BookController::class,'show'])->name('details');
 Route::get('/auth', function () {
-    return view('auth');
+    return view('front/auth');
 });
 Route::get('/profile', function () {
-    return view('profile');
+    return view('front/profile');
 });
+
+// back
+
+Route::get('/books',[BookController::class,'index'])->name('list');
