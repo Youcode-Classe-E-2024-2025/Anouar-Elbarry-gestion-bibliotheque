@@ -15,8 +15,12 @@ class Book extends Model
         'title', 
         'desciption', 
         'cover_img', 
-        'is_active'    
+        'is_active',
+        'price',
+        'author',
+        'publication_year',
+        'available_copies'  
     ];
 
-    
+
 }
