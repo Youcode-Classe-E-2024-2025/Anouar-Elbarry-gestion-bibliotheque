@@ -124,7 +124,7 @@ MIT License
 ## 📞 Contact
 **Anouar El Barry**  
 Email: anouar.elbarry@example.com  
-GitHub: @yourusername  
+GitHub: @anouar-elbarry
 
 Happy Reading! 📖
 ```
