@@ -51,14 +51,41 @@
                         </div>
 
                         <div class="flex space-x-4">
-                            <button class="flex-1 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition duration-300">
-                                Borrow Book
-                            </button>
-                            <button class="px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-300">
-                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </button>
+                        <form action="{{ route('Borrow') }}" method="POST" class="w-full">
+    @csrf
+    <div class="flex items-center space-x-4">
+    <input type="hidden" name="book_id" value="{{ $book->id }}">
+        <button type="submit" class="flex-1 group relative inline-flex items-center justify-center 
+            px-6 py-3 overflow-hidden font-bold text-white rounded-lg 
+            bg-gradient-to-br from-gray-900 to-black 
+            hover:from-gray-800 hover:to-gray-900 
+            focus:ring-4 focus:outline-none focus:ring-gray-600 
+            transition duration-300 ease-in-out transform 
+            hover:scale-105 active:scale-95">
+            <span class="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-10 bg-white"></span>
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                </path>
+            </svg>
+            Borrow Book
+            @if($book->available_copies > 0)
+                <span class="ml-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                    {{ $book->available_copies }} Available
+                </span>
+            @else
+                <span class="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    Out of Stock
+                </span>
+            @endif
+        </button>
+
+    @if($book->available_copies <= 0)
+        <p class="text-red-500 text-sm mt-2 text-center">
+            Sorry, this book is currently unavailable for borrowing.
+        </p>
+    @endif
+</form>
                         </div>
                     </div>
                 </div>

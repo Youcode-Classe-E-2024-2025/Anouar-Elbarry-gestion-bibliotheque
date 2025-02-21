@@ -41,7 +41,7 @@
 <!-- Featured Books Section -->
 <div id="featured" class="max-w-7xl mx-auto px-4 py-16">
     <div class="flex justify-between items-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900">Featured Books</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Last Books</h2>
         <a href="/books" class="text-yellow-600 hover:text-yellow-700 font-medium">View All →</a>
     </div>
     
@@ -54,19 +54,16 @@
                      class="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button class="w-full bg-yellow-400 text-black py-2 rounded-full font-medium hover:bg-yellow-500">
+                    <a href="{{ route('details',$book->id) }}" class="w-full bg-yellow-400 text-black py-2 rounded-full font-medium p-4 hover:bg-yellow-500">
                         Quick View
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="mt-4 space-y-2">
                 <h3 class="text-lg font-semibold text-gray-900">{{ $book->title }}</h3>
-                <p class="text-gray-600">John Smith</p>
+                <p class="text-gray-600">{{ $book->author }}</p>
                 <div class="flex items-center space-x-2">
-                    <div class="flex text-yellow-400">
-                        ★★★★★
-                    </div>
-                    <span class="text-sm text-gray-500">(4.5)</span>
+                    <span class="text-sm text-gray-500">Available Copies : {{ $book->available_copies }}</span>
                 </div>
             </div>
         </div>

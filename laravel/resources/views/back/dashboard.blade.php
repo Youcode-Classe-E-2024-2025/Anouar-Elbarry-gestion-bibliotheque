@@ -46,6 +46,14 @@
                                    required>
                         </div>
                         <div>
+                            <label class="block text-gray-700 font-medium mb-2">Available Copies</label>
+                            <input type="number" 
+                                   name="available_copies"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   placeholder="Enter the Price" 
+                                   required>
+                        </div>
+                        <div>
                             <label class="block text-gray-700 font-medium mb-2">Description</label>
                             <textarea 
                                 name="desciption"

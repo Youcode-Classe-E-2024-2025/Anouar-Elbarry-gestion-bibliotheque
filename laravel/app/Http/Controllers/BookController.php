@@ -78,8 +78,8 @@ class BookController extends Controller
         //
     }
 
-    public function Last3books(){
-        $Lastbooks = Book::where('is_active', 1)->latest()->take(3)->get();
+    public function Last4books(){
+        $Lastbooks = Book::where('is_active', 1)->latest()->take(4)->get();
         return view('front.home',compact('Lastbooks'));
     }
 }

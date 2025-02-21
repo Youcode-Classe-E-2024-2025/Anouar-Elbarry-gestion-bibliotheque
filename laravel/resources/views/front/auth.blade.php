@@ -24,13 +24,19 @@
             </div>
 
             <!-- Error Alert -->
-            <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert">
-                <strong class="font-bold">Error: </strong>
-                <span class="block sm:inline">Description goes here.</span>
-            </div>
+            @if ($errors->any())
+    <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
             <!-- Sign In Form -->
             <form id="signin-form" action='/auth/login' method='post' class="space-y-6">
+                @csrf
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Email address</label>
@@ -56,13 +62,14 @@
                     </a>
                 </div>
 
-                <button class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transform hover:scale-[1.02] transition-all duration-200 font-medium">
+                <button type="submit" class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transform hover:scale-[1.02] transition-all duration-200 font-medium">
                     Sign in
                 </button>
             </form>
 
             <!-- Sign Up Form -->
             <form id="signup-form" action='/auth/register' method='post' class="hidden space-y-6">
+                @csrf
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Username</label>
@@ -83,14 +90,14 @@
                             placeholder="••••••••">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Avatar URL</label>
-                        <input type="url" name="avatar" 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-black transition-all duration-200"
-                            placeholder="https://example.com/avatar.jpg">
-                    </div>
+    <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
+    <input type="password" name="password_confirmation" 
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+        placeholder="Confirm password">
+</div>
                 </div>
 
-                <button class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transform hover:scale-[1.02] transition-all duration-200 font-medium">
+                <button type="submit" class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transform hover:scale-[1.02] transition-all duration-200 font-medium">
                     Create Account
                 </button>
             </form>

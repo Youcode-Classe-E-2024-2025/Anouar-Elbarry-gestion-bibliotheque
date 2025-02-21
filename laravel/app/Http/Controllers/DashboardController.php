@@ -28,6 +28,7 @@ class DashboardController extends Controller
         'desciption' => 'nullable|string',
         'cover_img' => 'nullable|url',
         'publication_year' => 'nullable|integer|min:1800|max:2025',
+        'available_copies' => 'nullable|integer',
         'price' => 'nullable|integer'
         ]);
 

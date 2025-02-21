@@ -1,70 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-gray-50 min-h-screen py-12">
-    <div class="max-w-3xl mx-auto px-4">
-        <!-- Profile Card -->
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-            <!-- Profile Header -->
-            <div class="bg-gradient-to-r from-gray-900 to-black p-6">
-                <div class="flex items-center space-x-4">
-                    <img src="https://via.placeholder.com/100" alt="Profile Picture" 
-                         class="w-24 h-24 rounded-full border-4 border-white">
-                    <div class="text-white">
-                        <h1 class="text-2xl font-bold">John Doe</h1>
-                        <p class="text-gray-300">Member #12345</p>
+<div class="container mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-3 gap-8">
+        <!-- Profile Information -->
+        <div class="md:col-span-1 bg-white shadow-md rounded-lg p-6">
+            <div class="text-center">
+                <!-- Profile Avatar/Image -->
+                <div class="mb-4">
+                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->username }}&background=random" 
+                         alt="{{ $user->username }}'s avatar" 
+                         class="w-32 h-32 rounded-full mx-auto object-cover">
+                </div>
+
+                <!-- User Details -->
+                <h2 class="text-2xl font-bold text-gray-800">{{ $user->username }}</h2>
+                <p class="text-gray-600">{{ $user->email }}</p>
+            </div>
+        </div>
+
+        <!-- Profile Details and Borrowed Books -->
+        <div class="md:col-span-2 space-y-6">
+            <!-- Personal Information -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Personal Information</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-medium">Username</label>
+                        <p class="text-gray-600">{{ $user->username }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-medium">Email</label>
+                        <p class="text-gray-600">{{ $user->email }}</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Profile Information -->
-            <div class="p-6 space-y-6">
-                <!-- Personal Information -->
-                <div>
-                    <h2 class="text-xl font-semibold mb-4">Personal Information</h2>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-sm text-gray-600">Email</label>
-                            <p class="font-medium">john.doe@example.com</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-gray-600">Phone</label>
-                            <p class="font-medium">+1 234 567 890</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-gray-600">Address</label>
-                            <p class="font-medium">123 Library Street</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-gray-600">Member Since</label>
-                            <p class="font-medium">January 2024</p>
-                        </div>
-                    </div>
+            <!-- Recently Borrowed Books -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold">Recently Borrowed Books</h3>
+                    @if($borrows->count() > 0)
+                        <a href="{{ route('showmyBooks') }}" class="text-blue-600 hover:text-blue-800">
+                            View All
+                        </a>
+                    @endif
                 </div>
 
-                <!-- Library Card -->
-                <div>
-                    <h2 class="text-xl font-semibold mb-4">Library Card</h2>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm text-gray-600">Card Status</p>
-                                <p class="font-medium text-green-600">Active</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-600">Valid Until</p>
-                                <p class="font-medium">December 2024</p>
-                            </div>
-                        </div>
+                @if($borrows->isEmpty())
+                    <div class="text-center text-gray-500">
+                        <p>No books borrowed yet</p>
                     </div>
-                </div>
-
-                <!-- Action Button -->
-                <div class="flex justify-end">
-                    <button class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition duration-300">
-                        Edit Profile
-                    </button>
-                </div>
+                @else
+                    <div class="grid md:grid-cols-3 gap-4">
+                        @foreach($borrows as $borrow)
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800">
+                                    {{ $borrow->book->title }}
+                                </h4>
+                                <p class="text-gray-600 text-sm">
+                                    Borrowed on: {{ $borrow->borrow_date->format('d M Y') }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </div>
